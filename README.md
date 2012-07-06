@@ -6,21 +6,21 @@ Service for easy Excel export with PHPExcel Library
 
 ### Step 1 . ( For Symfony v. < 2.1 - deps)
 
-1. Add the following lines in your `deps` file :
+Add the following lines in your `deps` file :
 
-    \[ExcelBundle\]
+    [ExcelBundle\]
         git=http://github.com/rgazelot/ExcelBundle.git
         target=/bundles/Export/ExcelBundle
 
-2. Now download the bundle by running the command :
+Now download the bundle by running the command :
 
     ./bin/vendors update
 
 Symfony will install your bundle in `vendors/bundles/Exports`
 
-3. Declare in the `autoload.php` :
+Declare in the `autoload.php` :
 
-    \# app/autoload.php
+    # app/autoload.php
 
     $loader->registerNamespaces(array(
         ...
@@ -35,7 +35,7 @@ coming soon ...
 
 Enable the bundle in the kernel :
 
-    \# app/AppKernel.php
+    # app/AppKernel.php
 
     $bundles = array(
         ...
@@ -46,7 +46,7 @@ Enable the bundle in the kernel :
 
 Because the PHPExcel library not use namespaces, create prefixes in `autoload.php`.
 
-    \# app/autoload.php
+    # app/autoload.php
 
     $loader->registerPrefixes(array(
         ...
@@ -57,7 +57,7 @@ Because the PHPExcel library not use namespaces, create prefixes in `autoload.ph
 
 In your configuration file :
 
-    \# app/config/config.yml
+    # app/config/config.yml
 
     export_excel: ~
 
