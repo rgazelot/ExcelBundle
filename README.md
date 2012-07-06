@@ -8,7 +8,7 @@ Service for easy Excel export with PHPExcel Library
 
 Add the following lines in your `deps` file :
 
-    [ExcelBundle\]
+    [ExcelBundle]
         git=http://github.com/rgazelot/ExcelBundle.git
         target=/bundles/Export/ExcelBundle
 
@@ -63,7 +63,7 @@ In your configuration file :
 
 ### Finish !
 
-Congratulations ! You have installed ExportBundle. Read the usage documentation for learn how use the service.
+Congratulations ! You have installed ExportBundle. Read the usage documentation for learn how to use the service.
 
 
 
