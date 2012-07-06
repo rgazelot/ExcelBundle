@@ -1,6 +1,6 @@
 {
     "name": "export/excel-bundle",
-    "type": "service",
+    "type": "symfony-bundle",
     "description": "Service for easy Excel export with PHPExcel Library in Symfony 2",
     "keywords": ["export","excel"],
     "homepage": "http://github.com/rgazelot/ExcelBundle",
@@ -18,7 +18,8 @@
     },
     "autoload": {
         "psr-0": {
-            "": ""
+            "Export\\ExcelBundle": ""
         }
-    }
+    },
+    "target-dir": "Export/ExcelBundle",
 }
