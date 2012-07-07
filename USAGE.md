@@ -1,5 +1,7 @@
 # Usage Export
 
+If you haven't read the installation guide : [Installation guide](https://github.com/rgazelot/ExcelBundle/blob/master/README.md).
+
 ## Presentation
 
 This service is responsible for processing the excel export. It has many functions which purpose is to create a sheet, a title, informations, tables, etc... This documentation explain any functions and stuff good to know of the service.
