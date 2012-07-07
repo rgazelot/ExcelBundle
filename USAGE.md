@@ -19,7 +19,7 @@ This service is accessible anywhere in your application. Just use the `get()` fu
 5. Import image
 6. Get sheet
 7. Write the export
-8. Foreword
+8. How the service stylize a cell ?
 9. Other important stuff
 
 ## 1. Create a sheet
