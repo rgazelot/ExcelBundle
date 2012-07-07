@@ -22,7 +22,7 @@ class Export
     }
 
     /**
-     *	Set default configuration of the document.
+     *  Set default configuration of the document.
      *  This function is public to override them from the controller.
      *  @param  array  $options  Array of options
      *  @return obj    $this
@@ -54,21 +54,12 @@ class Export
             )
         ));
 
-        // Set the dimensions of de cells for the Image and Title.
-        $this->currentSheet->getColumnDimensionByColumn($this->cursor['x'], $this->cursor['y'])->setWidth(5);
-        $this->cursor['x'] = 1;
-        $this->currentSheet->getColumnDimensionByColumn($this->cursor['x'], $this->cursor['y'])->setWidth(10);
-        $this->currentSheet->getRowDimension(1)->setRowHeight(30);
-        $this->currentSheet->getRowDimension(2)->setRowHeight(53);
-
-        // Set the image logo.
-        //$this->importImg('balloonlogo.png');
-
         return $this;
     }
 
     /**
      *  @param  int  $sheet
+     *  @return obj  $this
      */
     public function getSheet($sheet)
     {
@@ -89,8 +80,6 @@ class Export
 
     /**
      *  Set the title of the current sheet.
-     *  This function is public for first sheet. Indeed, we can pass the 
-     *  translation since the controller.
      *  @param  string  $title  Title of a sheet
      *  @return obj     $this
      */
@@ -110,17 +99,16 @@ class Export
     }
 
     /**
-     *  Set the title.
-     *  The style of the title is in private function styleTitle().
+     *  Write in a Cell.
      *  @param  string  $data     String of data for the title
      *  @param  array   $options  Array of options
      *  @return obj     $this
      */
-    public function setTitle($data, $options = array())
+    public function writeCell($data, $options = array())
     {
         // Set cursor
-        $this->cursor['x'] = 4;
-        $this->cursor['y'] = 2;
+        $this->cursor['x'] = 0;
+        $this->cursor['y'] = 1;
         if (isset($options['coordinates'])) {
             $this->cursor['x'] = $options['coordinates']['x'];
             $this->cursor['y'] = $options['coordinates']['y'];
@@ -142,7 +130,6 @@ class Export
             $this->chartCustomizeCell(array('alignment' => array('horizontal' => $options['hAlignment'])));
         }
 
-        // Set Title.
         $this->currentSheet->setCellValueExplicitByColumnAndRow($this->cursor['x'], $this->cursor['y'], $data);
         $this->chartCustomizeCell(array(
                 'font' => array(
@@ -152,65 +139,6 @@ class Export
                 ),
             )
         );
-
-        return $this;
-    }
-
-    /**
-     *  Set the statistics and their label under the title.
-     *  @param  array  $data     Labels and stats
-     *  @param  array  $options  Array of options
-     *  @return obj    $this
-     */
-    public function setInfo($data, $options = array())
-    {
-        // Set cursor
-        $this->cursor['x'] = 1;
-        $this->cursor['y'] = 4;
-
-        if (isset($options['coordinates'])) {
-            $this->cursor['x'] = $options['coordinates']['x'];
-            $this->cursor['y'] = $options['coordinates']['y'];
-        }
-
-        $nextWrap = $this->cursor['x'] + 8;
-
-        foreach ($data as $label => $val) {
-            $this->currentSheet->getRowDimension($this->cursor['y'])->setRowHeight(45);
-            $this->chartCustomizeCell(array(
-                    'font' => array(
-                        'bold'  => isset($options['bold']) ? $options['bold'] : true,
-                        'size'  => isset($options['size']) ? $options['size'] : 15,
-                        'color' => isset($options['color']) ? $options['color'] : '000000',
-                    ),
-                )
-            );
-
-            $this->currentSheet->setCellValueExplicitByColumnAndRow($this->cursor['x'], $this->cursor['y'], $val);
-
-            $this->cursor['x']++;
-
-            $this->chartCustomizeCell(array(
-                    'font' => array(
-                        'bold'  => isset($options['bold']) ? $options['bold'] : true,
-                        'size'  => isset($options['size']) ? $options['size'] : 15,
-                        'color' => isset($options['color']) ? $options['color'] : '000000',
-                    ),
-                )
-            );
-
-            // Merge cells for the label.
-            $this->currentSheet->mergeCellsByColumnAndRow($this->cursor['x'], $this->cursor['y'], $this->cursor['x'] + round(strlen($label)/9, 0), $this->cursor['y']);
-            $this->currentSheet->setCellValueExplicitByColumnAndRow($this->cursor['x'], $this->cursor['y'], $label);
-
-            // Cursor for next Info labels.
-            $this->cursor['x'] += 3;
-
-            if ($this->cursor['x'] == $nextWrap) {
-                $this->cursor['x'] -= 8;
-                $this->cursor['y'] += 2;
-            }
-        }
 
         return $this;
     }
@@ -289,13 +217,13 @@ class Export
             $this->cursor['y']++;
         }
 
-        $c = 0;
         // Write data
+        $zebra = 0;
         foreach ($data as $line) {
 
             foreach ($line as $key => $col) {
                 if (!isset($options['zebra'])) {
-                    if ($c % 2 == 1) {
+                    if ($zebra % 2 == 1) {
                         $this->chartCustomizeCell(array(
                             'fill' => isset($options['zebra']['color']) ? $options['zebra']['color'] : 'a0c5e3',
                         ));
@@ -307,12 +235,36 @@ class Export
 
             isset($options['coordinates']) ? $this->cursor['x'] = $options['coordinates']['x'] : $this->cursor['x'] = 1;
             $this->cursor['y']++;
-            $c++;
+            $zebra++;
         }
 
-        if (isset($options['return'])) {
-            return array($this->cursor['x'], $this->cursor['y']);
+        return isset($options['return']) ? array($this->cursor['x'], $this->cursor['y']) : $this;
+    }
+
+    /**
+     *  Import an image in a cell
+     *  @param  string  $path     path of the image
+     *  @param  array   $options
+     */
+    public function importImg($path, $options = array())
+    {
+        $this->cursor['x'] = 0;
+        $this->cursor['y'] = 1;
+        if (isset($options['coordinates'])) {
+            $this->cursor['x'] = $options['coordinates']['x'];
+            $this->cursor['y'] = $options['coordinates']['y'];
         }
+
+        if (isset($options['heightRow'])) {
+            $this->currentSheet->getRowDimension($this->cursor['y'])->setRowHeight($options['heightRow']);
+        }
+
+        $this->currentSheet->mergeCellsByColumnAndRow($this->cursor['x'], $this->cursor['y'],  $this->cursor['x'] + $options['merge'], $this->cursor['y']);
+
+        $objDrawing = new PHPExcel_Worksheet_Drawing();
+        $objDrawing->setPath($path);
+        $objDrawing->setCoordinates($options['imgCoordinates']);
+        $objDrawing->setWorksheet($this->currentSheet);
 
         return $this;
     }
@@ -369,21 +321,6 @@ class Export
             return;
         }
         $this->cursor['x']++;
-    }
-
-    /**
-     *	@param  string  $path  path of the image
-     */
-    private function importImg($path)
-    {
-        // Merge cells for the title.
-        $nbMerge = 3;
-        $this->currentSheet->mergeCells('B2:D2');
-
-        $objDrawing = new PHPExcel_Worksheet_Drawing();
-        $objDrawing->setPath($path);
-        $objDrawing->setCoordinates("B2");
-        $objDrawing->setWorksheet($this->currentSheet);
     }
 
     /**
