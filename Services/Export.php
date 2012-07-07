@@ -22,42 +22,6 @@ class Export
     }
 
     /**
-     *  Set default configuration of the document.
-     *  This function is public to override them from the controller.
-     *  @param  array  $options  Array of options
-     *  @return obj    $this
-     */
-    public function setDefault($options = array())
-    {
-        $this->currentSheet = $this->workbook->getActiveSheet();
-
-        // Default cursor cordinates
-        $this->cursor = array(
-            'x' => 0,
-            'y' => 1,
-        );
-
-        // Default style of the sheet
-        $this->currentSheet->getDefaultStyle()->applyFromArray(array(
-            'font'      => array(
-                'name' => 'Arial',
-                'size' => 12 ,
-            ),
-            'alignment' => array(
-                'horizontal' => \PHPExcel_Style_Alignment::HORIZONTAL_CENTER,
-                'vertical'   => \PHPExcel_Style_Alignment::VERTICAL_CENTER,
-            ),
-            'borders'  => array(
-                'allborders' => array(
-                    'style'  => \PHPExcel_Style_Border::BORDER_NONE,
-                )
-            )
-        ));
-
-        return $this;
-    }
-
-    /**
      *  @param  int  $sheet
      *  @return obj  $this
      */
@@ -284,6 +248,37 @@ class Export
     }
 
     // ============== PRIVATES ============== //
+
+    /**
+     *  Set default configuration of the document.
+     */
+    private function setDefault()
+    {
+        $this->currentSheet = $this->workbook->getActiveSheet();
+
+        // Default cursor cordinates
+        $this->cursor = array(
+            'x' => 0,
+            'y' => 1,
+        );
+
+        // Default style of the sheet
+        $this->currentSheet->getDefaultStyle()->applyFromArray(array(
+            'font'      => array(
+                'name' => 'Arial',
+                'size' => 12 ,
+            ),
+            'alignment' => array(
+                'horizontal' => \PHPExcel_Style_Alignment::HORIZONTAL_CENTER,
+                'vertical'   => \PHPExcel_Style_Alignment::VERTICAL_CENTER,
+            ),
+            'borders'  => array(
+                'allborders' => array(
+                    'style'  => \PHPExcel_Style_Border::BORDER_NONE,
+                )
+            )
+        ));
+    }
 
     /**
      *  @param  string  $value      Value

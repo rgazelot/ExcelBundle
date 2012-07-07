@@ -63,7 +63,7 @@ In your configuration file :
 
 ### Finish !
 
-Congratulations ! You have installed ExportBundle. Read the [usage documentation](https://github.com/rgazelot/) for learn how to use the service.
+Congratulations ! You have installed ExportBundle. Read the [usage documentation](https://github.com/rgazelot/ExcelBundle/blob/master/USAGE.md) for learn how to use the service.
 
 
 

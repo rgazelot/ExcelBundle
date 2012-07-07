@@ -1,4 +1,4 @@
-# UsageExport
+# Usage Export
 
 ## Presentation
 
@@ -10,50 +10,25 @@ This service is accessible anywhere in your application. Just use the `get()` fu
 
 ### Table fo content
 
-1. Foreword
-2. Create a sheet
-3. Set name of a sheet
-4. Set title
-5. Write a table
-6. Import image
-7. Write the export
-8. Other important stuff
+1. Create a sheet
+2. Set name of a sheet
+3. Set title
+4. Write a table
+5. Import image
+6. Write the export
+7. Get sheet
+8. Foreword
+9. Other important stuff
 
-## 1. Foreword
-
-For stylize a cell, you need to use different functions of PHPExcel library like `getFont()`, `getStyle()` or `getAlignment()`. All of those functions are embedded in a single function named *chartCustomizeCell()*. It is a private function and you can access it simply with `$this->chartCustomizeCell()` evrywhere in the service. You must stylize all cells with this function.
-
-#### Parameters :
-
-The function take an array for options. Here you have all the differents styles possible with the function :
-
-	1.  $options = array(
-			'font' => array(
-				'name'   => string,
-				'size'   => int,
-				'bold'   => true/false,
-				'italic' => true/false,
-				'color'  => array(
-					'rgb' => hexa,
-				),
-			),
-			'fill' => array(
-				'color' => array(
-					'rgb' => hexa,
-				),
-			),
-			'alignment' => array(
-				'horizontal' => string : left/right/center,
-				'vertical'   => string : left/right,
-				'wrap'       => true/false,
-			),
-		)
-
-## 2. Create a sheet
+## 1. Create a sheet
 
 You can create a lot of sheet with the function `createSheet()`. This function set automatically the current sheet for the new sheet recently created.
 
-## 3. Set name of a sheet
+#### Important :
+
+When the service is call with `get('export.excel')`, the `setDefault()` function create the first sheet. So you do not have create.
+
+## 2. Set name of a sheet
 
 The name of a sheet is displayed on the tab in Excel. You can set it with the function `setNameOfSheet()`.
 
@@ -61,7 +36,7 @@ The name of a sheet is displayed on the tab in Excel. You can set it with the fu
 
 	1. $title : string
 
-## 4. Set title
+## 3. Set title
 
 The `setTitle()` function create a little table in one cell and with title font by default. By default, you have the following font : `25 bold #000000` (where 25 is the size). But you can change anything with the options in parameters.
 
@@ -90,7 +65,7 @@ The `setTitle()` function create a little table in one cell and with title font 
 * `heightRow` : the height of the row.
 * `hAlignment` : the horizontal text style in the cell.
 
-## 5. Write a table
+## 4. Write a table
 
 The function `writeTable` is probably the most important function in the service. It can help you to drawing a lot of table with its multiple options.
 
@@ -189,7 +164,7 @@ Each indexes of the array `$label` are the same in the `$data`. They represent t
 * `mergeCols` : by default, the merge is one cell.
 * `coordinates` : the default coordinates are x = 0 and y = 1.
 
-## 6. Import Image
+## 5. Import Image
 
 The goal of this function is import image where you want in the sheet. this function is excute with `importImg()`.
 
@@ -218,7 +193,7 @@ optional :
 * `coordinates` : the default coordinates are x = 0 and y = 1.
 * `merge` : by default, the merge is one cell.
 
-## 7. Write the export
+## 6. Write the export
 
 The export must be write and launch with the function `writeExport()`. This function use `PHPExcel_Writer_Excel5` for create a file in the tmp. The extension of the export will be .xls.
 
@@ -226,7 +201,45 @@ The export must be write and launch with the function `writeExport()`. This func
 
 	1. $filename : string
 
-## 8. Other important stuff
+## 7. Get sheet
+
+Maybe you want access to a specific sheet for set a summary, or write another table. You can make it with the function `getSheet()`. Just pass the number of the sheet what you want and the function sets the current sheet to this sheet.
+
+#### Parameters :
+
+	1. $sheet : int
+
+## 8. How the service stylize a cell ?
+
+For stylize a cell, you need to use different functions of PHPExcel library like `getFont()`, `getStyle()` or `getAlignment()`. All of those functions are embedded in a single function named `chartCustomizeCell()`. It is a private function of the service and you can access it simply with `$this->chartCustomizeCell()` evrywhere in the service. You must stylize all cells with this function.
+
+#### Parameters :
+
+The function take an array for options. Here you have all the differents styles possible with the function :
+
+	1.  $options = array(
+			'font' => array(
+				'name'   => string,
+				'size'   => int,
+				'bold'   => true/false,
+				'italic' => true/false,
+				'color'  => array(
+					'rgb' => hexa,
+				),
+			),
+			'fill' => array(
+				'color' => array(
+					'rgb' => hexa,
+				),
+			),
+			'alignment' => array(
+				'horizontal' => string : left/right/center,
+				'vertical'   => string : left/right,
+				'wrap'       => true/false,
+			),
+		)
+
+## 9. Other important stuff
 
 #### Chainability
 
