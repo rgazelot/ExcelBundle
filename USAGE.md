@@ -15,8 +15,8 @@ This service is accessible anywhere in your application. Just use the `get()` fu
 3. Set title
 4. Write a table
 5. Import image
-6. Write the export
-7. Get sheet
+6. Get sheet
+7. Write the export
 8. Foreword
 9. Other important stuff
 
@@ -193,21 +193,21 @@ optional :
 * `coordinates` : the default coordinates are x = 0 and y = 1.
 * `merge` : by default, the merge is one cell.
 
-## 6. Write the export
-
-The export must be write and launch with the function `writeExport()`. This function use `PHPExcel_Writer_Excel5` for create a file in the tmp. The extension of the export will be .xls.
-
-#### Parameters :
-
-	1. $filename : string
-
-## 7. Get sheet
+## 6. Get sheet
 
 Maybe you want access to a specific sheet for set a summary, or write another table. You can make it with the function `getSheet()`. Just pass the number of the sheet what you want and the function sets the current sheet to this sheet.
 
 #### Parameters :
 
 	1. $sheet : int
+
+## 7. Write the export
+
+The export must be write and launch with the function `writeExport()`. This function use `PHPExcel_Writer_Excel5` for create a file in the tmp. The extension of the export will be .xls.
+
+#### Parameters :
+
+	1. $filename : string
 
 ## 8. How the service stylize a cell ?
 
@@ -273,22 +273,9 @@ ALl the function of the service can be chain. You can create a query like this :
             'infos'       => true,
          ));
 
-#### Build an export
-
-To build an export, the best practice is create a new service. Because the treatment of the data to build a correct array of data is strong and big. In your new service, don't forget to include the `balloon.export` service and maybe the `translator` service or other services like `balloon.statistic`. In your Controller, you only manage the cache, the call to your new export service and build the response.
-
-You can find three examples of export in
-
-* [src/Balloon/FormBundle/Service/FormExport.php](https://github.com/Balloon/Balloon5/blob/master/src/Balloon/FormBundle/Service/FormExport.php)
-* [src/Balloon/QuoteBundle/Service/QuoteExport.php](https://github.com/Balloon/Balloon5/blob/master/src/Balloon/QuoteBundle/Service/QuoteExport.php)
-* [src/Balloon/PollBundle/Service/PollExport.php](https://github.com/Balloon/Balloon5/blob/master/src/Balloon/PollBundle/Service/PollExport.php)
-
-They are manage by the Controller [src/Balloon/EventBundle/StatsController.php](https://github.com/Balloon/Balloon5/blob/master/src/Balloon/EventBundle/Controller/StatsController.php).
-
 #### Developpers
 
-This service was wrote by Rémy Gazelot : Github : [rgazelot](https://github.com/rgazelot) / Twitter : [@remygazelot](https://twitter.com/#!/remygazelot) and reviewed by Guillaume Potier : Github : [guillaumepotier](https://github.com/guillaumepotier) / Twitter : [@guillaumepotier](https://twitter.com/#!/guillaumepotier)
-
+This service was wrote by Rémy Gazelot : Github : [rgazelot](https://github.com/rgazelot) / Twitter : [@remygazelot](https://twitter.com/#!/remygazelot)
 
 
 
