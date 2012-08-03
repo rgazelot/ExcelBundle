@@ -19,5 +19,6 @@
     },
     "autoload": {
         "psr-0": { "Export\\ExcelBundle": "" }
-    }
+    },
+    "target-dir": "Export/ExcelBundle"
 }
