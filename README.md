@@ -2,7 +2,7 @@
 
 Service for easy Excel export with PHPExcel Library
 
-## Instalation
+## Installation
 
 ### Step 1 . ( For Symfony v. < 2.1 - deps)
 
