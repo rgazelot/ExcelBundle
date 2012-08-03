@@ -1,13 +1,14 @@
 {
     "name": "export/excel-bundle",
+    "version": "0.0.1",
     "type": "symfony-bundle",
     "description": "Service for easy Excel export with PHPExcel Library in Symfony 2",
-    "keywords": ["export","excel"],
+    "keywords": ["export","excel","symfony2"],
     "homepage": "http://github.com/rgazelot/ExcelBundle",
     "license": "MIT",
     "authors": [
         {
-            "name": "Rémy Gazlot",
+            "name": "Rémy Gazelot",
             "email": "r.gazelot@gmail.com",
             "homepage": "http://www.remygazelot.fr",
             "role": "Developer"
