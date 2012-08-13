@@ -20,7 +20,7 @@
     "autoload": {
         "psr-0": {
             "Export\\ExcelBundle": "",
-            "PHPExcel": "vendor/phpExcel/Classes"
+            "PHPExcel": "vendor/export/excel-bundle/Export/ExcelBundle/Library/phpExcel/Classes"
         }
     },
     "target-dir": "Export/ExcelBundle"
