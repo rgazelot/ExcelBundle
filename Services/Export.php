@@ -235,14 +235,13 @@ class Export
 
     /**
      *  Write the document.
-     *  @param  string  $filename  The name of export
-     *  @param  string  $hash      The hash which represent the name of temp folder where the export will be save
+     *  @param  string  $filepath  The path of export
      *  @return obj     $this
      */
-    public function writeExport($filename)
+    public function writeExport($filepath)
     {
         $writer = new PHPExcel_Writer_Excel5($this->workbook);
-        $writer->save('/tmp/' . $filename . '.xls');
+        $writer->save($filepath . '.xls');
 
         return $this;
     }
