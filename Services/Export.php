@@ -204,12 +204,12 @@ class Export
 
         return isset($options['return']) ? array($this->cursor['x'], $this->cursor['y']) : $this;
     }
-    
+
     /**
-     * Import an image in a cell
-     * @param  string $path     path of the image
-     * @param  array  $options
-     * @return Export
+     *  Import an image in a cell
+     *  @param  string $path     path of the image
+     *  @param  array  $options
+     *  @return Export
      */
     public function importImg($path, $options = array())
     {
