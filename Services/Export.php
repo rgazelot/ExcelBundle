@@ -23,7 +23,7 @@ class Export
 
     /**
      *  @param  int  $sheet
-     *  @return obj  $this
+     *  @return Export  $this
      */
     public function getSheet($sheet)
     {
@@ -33,7 +33,7 @@ class Export
 
     /**
      *  Create new sheet
-     *  @return  obj  $this
+     *  @return  Export  $this
      */
     public function createSheet()
     {
@@ -45,7 +45,7 @@ class Export
     /**
      *  Set the title of the current sheet.
      *  @param  string  $title  Title of a sheet
-     *  @return obj     $this
+     *  @return Export     $this
      */
     public function setNameOfSheet($title)
     {
@@ -66,7 +66,7 @@ class Export
      *  Write in a Cell.
      *  @param  string  $data     String of data for the title
      *  @param  array   $options  Array of options
-     *  @return obj     $this
+     *  @return Export     $this
      */
     public function writeCell($data, $options = array())
     {
@@ -112,7 +112,7 @@ class Export
      *  @param  array  $data     Data
      *  @param  array  $labels   Array of labels
      *  @param  array  $options  Array of options
-     *  @return obj    $this
+     *  @return Export    $this
      */
     public function writeTable($data, $labels = array(), $options = array())
     {
@@ -207,8 +207,9 @@ class Export
 
     /**
      *  Import an image in a cell
-     *  @param  string  $path     path of the image
-     *  @param  array   $options
+     *  @param  string $path     path of the image
+     *  @param  array  $options
+     *  @return Export
      */
     public function importImg($path, $options = array())
     {
@@ -236,7 +237,7 @@ class Export
     /**
      *  Write the document.
      *  @param  string  $filepath  The path of export
-     *  @return obj     $this
+     *  @return Export     $this
      */
     public function writeExport($filepath)
     {
