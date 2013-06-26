@@ -1,3 +1,7 @@
+# Deprecated bundle
+
+This library is deprecated. I suggest you to use this new library write to easily build table and handle PHPExcel : https://github.com/Wisembly/ExcelAnt
+
 # ExcelBundle
 
 Service for easy Excel export with PHPExcel Library
